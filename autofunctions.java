@@ -218,51 +218,48 @@ public class autofunctions
     public void DriveForwardGyro(double Power, int Distance)
     {
         ResetGyro();
-        //resetAngle();
-        // up motor no encoder
-        motorR_Up.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorL_Up.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorR_Up.setDirection(DcMotor.Direction.REVERSE);
-        motorL_Up.setDirection(DcMotor.Direction.FORWARD);
+        // Down motor no encoder
+        motorR_Down.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorL_Down.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorR_Down.setDirection(DcMotor.Direction.FORWARD);
+        motorL_Down.setDirection(DcMotor.Direction.REVERSE);
 
-        motorL_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorL_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorR_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorR_Up.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorL_Up.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         AllBRAKE();
 
-        motorR_Down.setTargetPosition(-Distance);
-        motorL_Down.setTargetPosition(Distance);
+        motorR_Up.setTargetPosition(Distance);
+        motorL_Up.setTargetPosition(-Distance);
 
 
-        motorL_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        motorL_Up.setPower(Power);
-        motorR_Up.setPower(Power);
+        motorL_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorR_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         motorL_Down.setPower(Power);
         motorR_Down.setPower(Power);
 
+        motorL_Up.setPower(Power);
+        motorR_Up.setPower(Power);
 
 
-        while (motorR_Down.isBusy()&& motorL_Down.isBusy())
+
+        while (motorR_Up.isBusy()&& motorL_Up.isBusy())
         {
             correction = checkDirection();
-            motorL_Up.setPower(Power-correction);
-            motorR_Up.setPower(Power+correction);
+            motorL_Down.setPower(Power-correction);
+            motorR_Down.setPower(Power+correction);
             //Wait until the task is done
         }
         StopDriving();
 
-        motorR_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorR_Up.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorL_Up.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorR_Up.setDirection(DcMotor.Direction.FORWARD);
-
-
+        motorR_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorL_Down.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorL_Down.setDirection(DcMotor.Direction.FORWARD);
 
     }
 

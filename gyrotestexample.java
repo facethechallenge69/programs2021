@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.programs2021.autofunctions;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "Por La Ganga 69*69low power", group = "Tutorials")
+@Autonomous(name = "*working gyro motor side*", group = "Tutorials")
 public class gyrotestexample extends LinearOpMode
 {
     //all the wheel motors
@@ -205,8 +205,8 @@ public class gyrotestexample extends LinearOpMode
         sleep(300); */
 
 
-
-        auto_functions.DriveBackGyro(0.2, (-5169));
+//working gyro moving straight from open motor side power positive distance negative.
+        auto_functions.DriveBackGyro(0.368, (-5169));
 
 
 

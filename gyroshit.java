@@ -33,7 +33,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "gyroshit", group = "Tutorials")
+@Autonomous(name = "*test gyro pdmm side*v3", group = "Tutorials")
 public class gyroshit extends LinearOpMode
 {
     //all the wheel motors
@@ -136,7 +136,7 @@ public class gyroshit extends LinearOpMode
 
         waitForStart();
 
-        auto_functions.DriveBackGyro(0.469, (-1600-CurrentPosition-2269-1125-96)*-1);
+        auto_functions.DriveForwardGyro(0.369, (-1569));
 //auto_functions.DriveForwardGyro(0.3, 3069);
 
 
