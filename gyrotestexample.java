@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.programs2021.autofunctions;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "Por La Ganga 69", group = "Tutorials")
+@Autonomous(name = "Por La Ganga 69*69low power", group = "Tutorials")
 public class gyrotestexample extends LinearOpMode
 {
     //all the wheel motors
@@ -78,25 +78,25 @@ public class gyrotestexample extends LinearOpMode
         motorR_Up = hardwareMap.dcMotor.get("right_motor_up");
 
         //hardware for servos
-        RedServo = hardwareMap.servo.get("red_servo");
-        BlackServo = hardwareMap.servo.get("black_servo");
+       // RedServo = hardwareMap.servo.get("red_servo");
+      //  BlackServo = hardwareMap.servo.get("black_servo");
 
         //more motors!
-        ArmMotor_Left = hardwareMap.dcMotor.get("armmotor_l");
-        ArmMotor_Right = hardwareMap.dcMotor.get("armmotor_r");
+       // ArmMotor_Left = hardwareMap.dcMotor.get("armmotor_l");
+       // ArmMotor_Right = hardwareMap.dcMotor.get("armmotor_r");
 
         //one more servo
-        armservo = hardwareMap.servo.get("arm_servo");
-        shake_shack_servo = hardwareMap.servo.get("servo_arm");
+       // armservo = hardwareMap.servo.get("arm_servo");
+       // shake_shack_servo = hardwareMap.servo.get("servo_arm");
 
-        side_servo = hardwareMap.servo.get("side_servo");
-        side_servo_claw = hardwareMap.servo.get("side_servo_gang");
+      //  side_servo = hardwareMap.servo.get("side_servo");
+      //  side_servo_claw = hardwareMap.servo.get("side_servo_gang");
 
         //colors
-        colorSensor1 = (NormalizedColorSensor) hardwareMap.colorSensor.get("red_color");
-        colorSensor2 = (NormalizedColorSensor) hardwareMap.colorSensor.get("black_color");
-        colorSensor3 = (NormalizedColorSensor) hardwareMap.colorSensor.get("red_color.2");
-        colorSensor4 = (NormalizedColorSensor) hardwareMap.colorSensor.get("black_color.2");
+     //   colorSensor1 = (NormalizedColorSensor) hardwareMap.colorSensor.get("red_color");
+      //  colorSensor2 = (NormalizedColorSensor) hardwareMap.colorSensor.get("black_color");
+      //  colorSensor3 = (NormalizedColorSensor) hardwareMap.colorSensor.get("red_color.2");
+       // colorSensor4 = (NormalizedColorSensor) hardwareMap.colorSensor.get("black_color.2");
 
         //potential gyro, we will just let it stay here
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -111,8 +111,8 @@ public class gyrotestexample extends LinearOpMode
         motorR_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        ArmMotor_Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ArmMotor_Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+   //     ArmMotor_Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    //    ArmMotor_Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Initializing from autofunctions.java
         auto_functions.Initialize(motorL_Down,
@@ -139,20 +139,20 @@ public class gyrotestexample extends LinearOpMode
 
         //Waiting for Start to be pressed
 
-        ArmMotor_Right.getCurrentPosition();
+     //   ArmMotor_Right.getCurrentPosition();
 
         //  shake_shack_servo.setPosition(1);
 
 
         //  side_servo.setPosition(1);
 
-        side_servo_claw.setPosition(1);
+       // side_servo_claw.setPosition(1);
 
 
 
         waitForStart();
 
-        auto_functions.DriveForward(0.35,-1585);
+   /*     auto_functions.DriveForward(0.35,-1585);
 
         sleep(100);
 
@@ -202,11 +202,15 @@ public class gyrotestexample extends LinearOpMode
 
         side_servo.setPosition(0.29);
 
-        sleep(300);
+        sleep(300); */
 
-        auto_functions.DriveBackGyro(0.469, (-1600-CurrentPosition-2269-1125-96)*-1);
 
-        auto_functions.StrafeRight(0.35,369);
+
+        auto_functions.DriveBackGyro(0.2, (-5169));
+
+
+
+       /* auto_functions.StrafeRight(0.35,369);
 
         sleep(300);
 
@@ -244,6 +248,8 @@ public class gyrotestexample extends LinearOpMode
 
         auto_functions.DriveForward(0.69, 2600);
 
+
+        */
 
 
 
