@@ -13,13 +13,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-@Autonomous(name="AutoGyro", group="Exercises")
+@Autonomous(name="AutoGyroTurn90slow(84)", group="Exercises")
 //@Disabled
 public class AutoGyro extends LinearOpMode
 {
 
     private DcMotor motorL_Up;
+    private DcMotor motorL_Down;
     private DcMotor motorR_Up;
+    private DcMotor motorR_Down;
     TouchSensor             touch;
     BNO055IMU               imu;
     Orientation             lastAngles = new Orientation();
@@ -30,13 +32,18 @@ public class AutoGyro extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        motorL_Up = hardwareMap.dcMotor.get("left_motor_d");
-        motorR_Up = hardwareMap.dcMotor.get("right_motor_d");
+        motorL_Down = hardwareMap.dcMotor.get("left_motor_d");
+        motorR_Down = hardwareMap.dcMotor.get("right_motor_d");
+        motorL_Up = hardwareMap.dcMotor.get("left_motor_up");
+        motorR_Up = hardwareMap.dcMotor.get("right_motor_up");
 
         motorL_Up.setDirection(DcMotor.Direction.REVERSE);
+        motorL_Down.setDirection(DcMotor.Direction.REVERSE);
 
         motorL_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorR_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorL_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorR_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -89,7 +96,7 @@ public class AutoGyro extends LinearOpMode
             //motorL_Up.setPower(power - correction);
             //motorR_Up.setPower(power + correction);
 
-            rotate(90, 0.4);
+            rotate(84, 0.2);
 
             // We record the sensor values because we will test them in more than
             // one place with time passing between those places. See the lesson on
@@ -101,6 +108,8 @@ public class AutoGyro extends LinearOpMode
         // turn the motors off.
         motorR_Up.setPower(0);
         motorL_Up.setPower(0);
+        motorR_Down.setPower(0);
+        motorL_Down.setPower(0);
     }
 
     /**
@@ -167,7 +176,7 @@ public class AutoGyro extends LinearOpMode
      * Rotate left or right the number of degrees. Does not support turning more than 180 degrees.
      * @param degrees Degrees to turn, + is left - is right
      */
-    private void rotate(int degrees, double power)
+    private void rotate(double degrees, double power)
     {
         double  leftPower, rightPower;
 
@@ -192,6 +201,8 @@ public class AutoGyro extends LinearOpMode
         // set power to rotate.
         motorL_Up.setPower(leftPower);
         motorR_Up.setPower(rightPower);
+        motorL_Down.setPower(leftPower);
+        motorR_Down.setPower(rightPower);
 
         // rotate until turn is completed.
         if (degrees < 0)
@@ -207,9 +218,11 @@ public class AutoGyro extends LinearOpMode
         // turn the motors off.
         motorR_Up.setPower(0);
         motorL_Up.setPower(0);
+        motorR_Down.setPower(0);
+        motorL_Down.setPower(0);
 
         // wait for rotation to stop.
-        sleep(1000);
+        sleep(3690);
 
         // reset angle tracking on new heading.
         resetAngle();
