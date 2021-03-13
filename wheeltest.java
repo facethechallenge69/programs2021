@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.programs2021;
 //needs to be fixed
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "tele6.9", group = "Tutorials")
+@TeleOp(name = "v6.9", group = "Tutorials")
 
 //test zayn change
 
@@ -62,6 +64,8 @@ wheeltest extends LinearOpMode {
 
         double motorSpeed = 1;
 
+        String telly =  "" + motorSpeed;
+
 
         int moving = 0;
 
@@ -102,7 +106,7 @@ wheeltest extends LinearOpMode {
 
         waitForStart();
 
-        ArmMotor_Right.getCurrentPosition();
+        //  ArmMotor_Right.getCurrentPosition();
 
 
 
@@ -114,18 +118,52 @@ wheeltest extends LinearOpMode {
             }
 
             if (gamepad1.b) {
-                motorSpeed = 0.5;
+                motorSpeed = 0.8;
             }
 
             if (gamepad1.x) {
-                motorSpeed = 0.269;
+                motorSpeed = 0.6;
+            }
+
+            if (gamepad1.dpad_up) {
+            motorSpeed = 0.4;
             }
 
 
-            motorL_Up.setPower(gamepad1.left_stick_y * motorSpeed);
+            if (gamepad1.y) {
+                motorSpeed -= 0.025;
+                sleep(400);
+
+            }
+
+            motorL_Up.setPower(gamepad1.left_stick_y * -motorSpeed);
             motorR_Up.setPower(gamepad1.left_stick_y * motorSpeed);
-            motorL_Down.setPower(gamepad1.left_stick_y * motorSpeed);
+            motorL_Down.setPower(gamepad1.left_stick_y * -motorSpeed);
             motorR_Down.setPower(gamepad1.left_stick_y * motorSpeed);
+
+
+            telly = "" + motorSpeed;
+
+
+            // System.out.println(motorSpeed);
+
+        //    System.out.flush();
+            // telemetry.addLine("Got black");
+            telemetry.addData("motorSeed1.0: %f", motorSpeed);
+            // telemetry.addData("r", "%d", Color.red(color2));
+         //   telemetry.addData("motorSeed3.0: ","%d", motorSpeed);
+
+            telemetry.addData("motorSpeed2.0: %d", motorSpeed);
+
+
+
+            telemetry.addData("servoposition %d", motorSpeed);
+
+            telemetry.addData(telly, motorSpeed);
+
+            telemetry.update();
+
+
 
 
 

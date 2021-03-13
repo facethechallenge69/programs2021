@@ -33,9 +33,13 @@ public class autofunctions
     private DcMotor motorR_Up;
     private DcMotor motorR_Down;
 
+    private DcMotor BMotor;
+
 
     private Servo RedServo;
     private Servo BlackServo;
+
+    private Servo BServo;
 
     private DcMotor ArmMotor_Left;
     private DcMotor ArmMotor_Right;
@@ -77,15 +81,17 @@ public class autofunctions
                            DcMotor motorR_DownIn,
                            DcMotor motorR_UpIn,
                            DcMotor motorL_UpIn,
-                           Servo RedServoIn,
-                           Servo BlackServoIn,
+                           DcMotor BMotorIn,
+                           Servo BServoIn,
+                           //Servo RedServoIn,
+                           //Servo BlackServoIn,
                            DcMotor ArmMotor_LeftIn,
                            DcMotor ArmMotor_RightIn,
-                           Servo ArmServoIn,
-                           Servo shake_shack_servoIn,
+                          // Servo ArmServoIn,
+                          // Servo shake_shack_servoIn,
                            BNO055IMU imuIn,
-                           NormalizedColorSensor colorSensor1In,
-                           NormalizedColorSensor colorSensor2In,
+                         //  NormalizedColorSensor colorSensor1In,
+                        //   NormalizedColorSensor colorSensor2In,
                          //  NormalizedColorSensor colorSensor3In,
                           // NormalizedColorSensor colorSensor4In,
                           // Servo side_servoIn,
@@ -97,16 +103,18 @@ public class autofunctions
         motorR_Down = motorR_DownIn;
         motorR_Up = motorR_UpIn;
         motorL_Up = motorL_UpIn;
+        BMotor = BMotorIn;
+        BServo = BServoIn;
 
-        RedServo = RedServoIn;
-        BlackServo = BlackServoIn;
+     //   RedServo = RedServoIn;
+     //   BlackServo = BlackServoIn;
         ArmMotor_Left = ArmMotor_LeftIn;
         ArmMotor_Right = ArmMotor_RightIn;
-        armservo = ArmServoIn;
-        shake_shack_servo = shake_shack_servoIn;
+      //  armservo = ArmServoIn;
+      //  shake_shack_servo = shake_shack_servoIn;
         imu = imuIn;
-        colorSensor1 = colorSensor1In;
-        colorSensor2 = colorSensor2In;
+     //   colorSensor1 = colorSensor1In;
+    //    colorSensor2 = colorSensor2In;
       //  colorSensor3 = colorSensor3In;
       //  colorSensor4 = colorSensor4In;
        // side_servo = side_servoIn;
@@ -586,6 +594,26 @@ public class autofunctions
         StopDriving();
     }
 
+    public void BobberMotor (double Power, int Distance)
+    {
+        BMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        BMotor.setTargetPosition(Distance);
+
+        BMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        BMotor.setPower(Power);
+
+        while (BMotor.isBusy())
+        {
+                //wait until its done
+        }
+
+        BMotor.setPower(0);
+
+
+
+    }
 
     public void CloseServo ()
     {

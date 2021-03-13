@@ -6,28 +6,23 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "feds got mr.guzman", group = "Tutorials")
+@TeleOp(name = "feds got patron guzman", group = "Tutorials")
 
 //test zayn change
 
 //test change amutha
 
 public class
-telefor2 extends LinearOpMode {
+scrimtele extends LinearOpMode {
     private DcMotor motorL_Down;
     private DcMotor motorR_Down;
     private DcMotor motorR_Up;
     private DcMotor motorL_Up;
 
+    public DcMotor bobber;
 
-    private Servo RedServo;
-    private Servo BlackServo;
 
-    private DcMotor ArmMotor_Left;
-    private DcMotor ArmMotor_Right;
 
-    private Servo armservo;
-    private Servo shake_shack_servo;
 
 
     int MOV_LEFT_RIGHT = 1;
@@ -47,20 +42,14 @@ telefor2 extends LinearOpMode {
         motorL_Up = hardwareMap.dcMotor.get("left_motor_up");
         motorR_Up = hardwareMap.dcMotor.get("right_motor_up");
 
+        bobber = hardwareMap.dcMotor.get("am");
 
-        RedServo = hardwareMap.servo.get("red_servo");
-        BlackServo = hardwareMap.servo.get("black_servo");
 
-        ArmMotor_Left = hardwareMap.dcMotor.get("armmotor_l");
-        ArmMotor_Right = hardwareMap.dcMotor.get("armmotor_r");
-
-        armservo = hardwareMap.servo.get("arm_servo");
-        shake_shack_servo = hardwareMap.servo.get("servo_arm");
 
 
         double motorSpeed = 1;
 
-        
+
         int moving = 0;
 
         double red_value = 0;
@@ -85,22 +74,15 @@ telefor2 extends LinearOpMode {
         motorR_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        ArmMotor_Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ArmMotor_Right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
-
-        BlackServo.setPosition(1);
-        RedServo.setPosition(1);
-
-        ArmMotor_Right.getCurrentPosition();
 
 
 
         waitForStart();
 
-        ArmMotor_Right.getCurrentPosition();
+
 
 
 
@@ -221,82 +203,12 @@ telefor2 extends LinearOpMode {
 
 
 
-
-            // red/black servo movement
-
-
-            if(gamepad2.dpad_up)
-            {
-                RedServo.setPosition(1);
-                BlackServo.setPosition(1);
-            }
-
-
-
-            if (gamepad2.dpad_down)
-            {
-                BlackServo.setPosition(0);
-                RedServo.setPosition(0);
-            }
-
-
-            if (gamepad2.left_bumper) {
-           //     arm_servo = arm_servo - 0.369;
-                armservo.setPosition(0);
-            }
-
-            if (gamepad2.right_bumper) {
-         //  arm_servo = arm_servo + 0.369;
-           armservo.setPosition(1);
-
-            }
-
-
-            //_______________________arm motor movement_______________
-
-
-
-                ArmMotor_Left.setPower(gamepad2.left_stick_y * -armPower);
-                ArmMotor_Right.setPower(gamepad2.left_stick_y * armPower);
-
-                if(gamepad2.a){
-                    armPower = 0.269;
-                }
-
-
-                if(gamepad2.b){
-                    armPower = 0.1769;
-                }
-
-
-                ArmMotor_Right.getCurrentPosition();
-                ArmPosition = ArmMotor_Right.getCurrentPosition();
-
-                ShakeServo = shake_shack_servo.getPosition();
-
-
-
-                shake_shack_servo.setPosition((0.000553016*ArmPosition)+0.955998);
+            bobber.setPower(0.2*gamepad2.right_stick_y);
 
 
 
 
 
-
-
-
-                telemetry.addData("ArmCurrentPosition = %d", ArmPosition);
-                telemetry.addData("ServoCurrentPosition = %d", ShakeServo);
-
-
-
-
-
-
-
-
-            telemetry.update();
-            idle();
 
         }
 

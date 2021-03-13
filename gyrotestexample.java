@@ -1,4 +1,4 @@
-//main PACKAGE.
+/*//main PACKAGE.
 package org.firstinspires.ftc.teamcode.programs2021;
 
 //hardware imports
@@ -30,6 +30,8 @@ public class gyrotestexample extends LinearOpMode
     private DcMotor motorL_Down;
     private DcMotor motorR_Up;
     private DcMotor motorR_Down;
+
+    private DcMotor BMotor;
 
     //more servos
     private Servo RedServo;
@@ -119,6 +121,7 @@ public class gyrotestexample extends LinearOpMode
                 motorR_Down,
                 motorR_Up,
                 motorL_Up,
+                BMotor,
                 RedServo,
                 BlackServo,
                 ArmMotor_Left,
@@ -203,7 +206,7 @@ public class gyrotestexample extends LinearOpMode
         side_servo.setPosition(0.29);
 
         sleep(300); */
-
+/*
 
 //working gyro moving straight from open motor side power positive distance negative.
         auto_functions.DriveBackGyro(0.368, (-5169));
@@ -257,5 +260,3 @@ public class gyrotestexample extends LinearOpMode
 
 
 
-    }
-}
