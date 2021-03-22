@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.programs2021.autofunctions;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "Federales en mi casa", group = "Tutorials")
+@Autonomous(name = "FinalAuto69", group = "Tutorials")
 public class scrimauto extends LinearOpMode
 {
     //all the wheel motors
@@ -145,7 +145,19 @@ public class scrimauto extends LinearOpMode
 
         waitForStart();
 
-        auto_functions.BobberMotor(0.2,269);
+        auto_functions.DriveForward(0.3,5669);
+
+        auto_functions.BobberMotor(0.2,469);
+
+        sleep(1000);
+
+        BServo.setPosition(1);
+
+        sleep(1000);
+        
+        BServo.setPosition(0);
+
+
 
 
     }

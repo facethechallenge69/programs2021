@@ -596,7 +596,9 @@ public class autofunctions
 
     public void BobberMotor (double Power, int Distance)
     {
+
         BMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         BMotor.setTargetPosition(Distance);
 
@@ -643,9 +645,6 @@ public class autofunctions
         motorL_Down.setPower(0);
         motorR_Up.setPower(0);
         motorR_Down.setPower(0);
-
-        ArmMotor_Right.setPower(0);
-        ArmMotor_Right.setPower(0);
     }
 
     public void AllFLOAT ()
