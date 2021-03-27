@@ -19,7 +19,12 @@ scrimtele extends LinearOpMode {
     private DcMotor motorR_Up;
     private DcMotor motorL_Up;
 
-    public DcMotor bobber;
+    private DcMotor ArmMotor1;
+    private DcMotor ArmMotor2;
+
+    private DcMotor BMotor;
+    private Servo BServo;
+    private DcMotor IntakeMotor;
 
 
 
@@ -42,12 +47,16 @@ scrimtele extends LinearOpMode {
         motorL_Up = hardwareMap.dcMotor.get("left_motor_up");
         motorR_Up = hardwareMap.dcMotor.get("right_motor_up");
 
-        bobber = hardwareMap.dcMotor.get("am");
+        BMotor = hardwareMap.dcMotor.get("am");
+        BServo = hardwareMap.servo.get("sg");
+        IntakeMotor = hardwareMap.dcMotor.get("im");
 
-
-
+        ArmMotor1 = hardwareMap.dcMotor.get("am1");
+        ArmMotor2 = hardwareMap.dcMotor.get("am2");
 
         double motorSpeed = 1;
+
+        double ThrowSpeed = 1;
 
 
         int moving = 0;
@@ -64,27 +73,15 @@ scrimtele extends LinearOpMode {
 
         double ShakeServo = 0;
 
-
-
-
-
-
         motorR_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorR_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-
-
-
-
+        ArmMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ArmMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
-
-
-
-
 
         while (opModeIsActive()) {
             //moves wheels forward and backward
@@ -101,10 +98,22 @@ scrimtele extends LinearOpMode {
                 motorSpeed = 0.269;
             }
 
-
-
-
-
+            if(gamepad2.a)
+            {
+               ThrowSpeed = 1;
+            }
+            if(gamepad2.b)
+            {
+                ThrowSpeed = 0.6;
+            }
+            if(gamepad2.x)
+            {
+                ThrowSpeed = 0.3;
+            }
+            if(gamepad2.y)
+            {
+                ThrowSpeed = 0.15;
+            }
 
 
             //incremental movement for RedServo
@@ -201,49 +210,40 @@ scrimtele extends LinearOpMode {
                 motorR_Up.setPower(0);
             }
 
+            BMotor.setPower(0.2*gamepad1.right_stick_y);
 
+            IntakeMotor.setPower(0.3*gamepad2.left_stick_y);
 
-            bobber.setPower(0.2*gamepad2.right_stick_y);
+            ArmMotor1.setPower(ThrowSpeed*gamepad2.right_stick_y);
 
+            ArmMotor2.setPower(ThrowSpeed*gamepad2.right_stick_y);
 
+            if(gamepad1.right_bumper)
+            {
+                BServo.setPosition(0);
+            }
 
-
-
+            if(gamepad1.left_bumper)
+            {
+                BServo.setPosition(1);
+            }
 
         }
 
 
     }
-
-    //void for claw
-  /*  public void ClawForward(double Power, int Distance) {
-
-
-        //Reset Encoders
-        motorArmClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        //Set to RUN_TO_POSITION Mode
-        motorArmClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        //Set Target Position
-        motorArmClaw.setTargetPosition(Distance);
-
-
-        //Setting Motor Power
-        motorArmClaw.setPower(Power);
-
-
-        //While Loop to Make Sure Encoders do Not Deactivate
-        while (motorArmClaw.isBusy()) {
-            //Wait until the task is done
-        }
-
-
-    }
-   */
-    //void for Circ
-
-
 }
+/*
+
+GamePad1:
+Left Stick moves wheel
+Right Stick moves the motor for the bobber
+The left bumper opens the servo for the bobber, right bumper closes
+a,b,x changes motor speed
+
+GamePad2:
+Left Stick moves the intake up and down
+Right Stick controls the motors that throw the rings
+a,b,x,y changes speed of the throw motors
+
+*/

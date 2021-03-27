@@ -19,12 +19,13 @@ telefor2 extends LinearOpMode {
     private DcMotor motorR_Up;
     private DcMotor motorL_Up;
 
-
     private Servo RedServo;
     private Servo BlackServo;
 
     private DcMotor ArmMotor_Left;
     private DcMotor ArmMotor_Right;
+
+    private DcMotor IntakeMotor;
 
     private Servo armservo;
     private Servo shake_shack_servo;
@@ -53,6 +54,7 @@ telefor2 extends LinearOpMode {
 
         ArmMotor_Left = hardwareMap.dcMotor.get("armmotor_l");
         ArmMotor_Right = hardwareMap.dcMotor.get("armmotor_r");
+        IntakeMotor = hardwareMap.dcMotor.get("im");
 
         armservo = hardwareMap.servo.get("arm_servo");
         shake_shack_servo = hardwareMap.servo.get("servo_arm");
