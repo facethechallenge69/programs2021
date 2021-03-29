@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "feds got patron guzman", group = "Tutorials")
+@TeleOp(name = "69tele", group = "Tutorials")
 
 //test zayn change
 
@@ -212,9 +212,9 @@ scrimtele extends LinearOpMode {
 
             BMotor.setPower(0.2*gamepad1.right_stick_y);
 
-            IntakeMotor.setPower(0.3*gamepad2.left_stick_y);
+            IntakeMotor.setPower(gamepad2.left_stick_y);
 
-            ArmMotor1.setPower(ThrowSpeed*gamepad2.right_stick_y);
+            ArmMotor1.setPower(-ThrowSpeed*gamepad2.right_stick_y);
 
             ArmMotor2.setPower(ThrowSpeed*gamepad2.right_stick_y);
 
