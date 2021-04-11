@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "feds got mr.guzman", group = "Tutorials")
+@TeleOp(name = "Mr. Guzman is breaking out of prison on April 4, 2021", group = "Tutorials")
 
 //test zayn change
 
@@ -18,9 +18,6 @@ telefor2 extends LinearOpMode {
     private DcMotor motorR_Down;
     private DcMotor motorR_Up;
     private DcMotor motorL_Up;
-
-    private Servo RedServo;
-    private Servo BlackServo;
 
     private DcMotor ArmMotor_Left;
     private DcMotor ArmMotor_Right;
@@ -49,8 +46,6 @@ telefor2 extends LinearOpMode {
         motorR_Up = hardwareMap.dcMotor.get("right_motor_up");
 
 
-        RedServo = hardwareMap.servo.get("red_servo");
-        BlackServo = hardwareMap.servo.get("black_servo");
 
         ArmMotor_Left = hardwareMap.dcMotor.get("armmotor_l");
         ArmMotor_Right = hardwareMap.dcMotor.get("armmotor_r");
@@ -62,7 +57,7 @@ telefor2 extends LinearOpMode {
 
         double motorSpeed = 1;
 
-        
+
         int moving = 0;
 
         double red_value = 0;
@@ -93,8 +88,7 @@ telefor2 extends LinearOpMode {
 
 
 
-        BlackServo.setPosition(1);
-        RedServo.setPosition(1);
+
 
         ArmMotor_Right.getCurrentPosition();
 
@@ -137,18 +131,18 @@ telefor2 extends LinearOpMode {
             if(moving == 0 && gamepad1.left_stick_y > 0 ) {
 // should be forward
                 moving = MOV_FRONT_BACK;
-                motorL_Down.setPower(motorSpeed * -1);
-                motorR_Down.setPower(motorSpeed * 1);
-                motorL_Up.setPower(motorSpeed * -1);
-                motorR_Up.setPower(motorSpeed * 1);
-            }
-            if(moving == 0 && gamepad1.left_stick_y < 0 ) {
-// should be backward
-                moving = MOV_FRONT_BACK;
                 motorL_Down.setPower(motorSpeed * 1);
                 motorR_Down.setPower(motorSpeed * -1);
                 motorL_Up.setPower(motorSpeed * 1);
                 motorR_Up.setPower(motorSpeed * -1);
+            }
+            if(moving == 0 && gamepad1.left_stick_y < 0 ) {
+// should be backward
+                moving = MOV_FRONT_BACK;
+                motorL_Down.setPower(motorSpeed * -1);
+                motorR_Down.setPower(motorSpeed * 1);
+                motorL_Up.setPower(motorSpeed * -1);
+                motorR_Up.setPower(motorSpeed * 1);
             }
             else if(gamepad1.left_stick_y ==0 && moving == MOV_FRONT_BACK)
             {
@@ -161,19 +155,19 @@ telefor2 extends LinearOpMode {
             if(moving == 0 && gamepad1.left_stick_x > 0 ) {
 // should be right
                 moving = MOV_LEFT_RIGHT;
-                motorL_Down.setPower(motorSpeed * -1);
-                motorR_Down.setPower(motorSpeed * -1);
-                motorL_Up.setPower(motorSpeed * -1);
-                motorR_Up.setPower(motorSpeed * -1);
+                motorL_Down.setPower(motorSpeed * 1);
+                motorR_Down.setPower(motorSpeed * 1);
+                motorL_Up.setPower(motorSpeed * 1);
+                motorR_Up.setPower(motorSpeed * 1);
             }
 
             if(moving == 0 && gamepad1.left_stick_x < 0 ) {
 // should be left
                 moving = MOV_LEFT_RIGHT;
-                motorL_Down.setPower(motorSpeed * 1);
-                motorR_Down.setPower(motorSpeed * 1);
-                motorL_Up.setPower(motorSpeed * 1);
-                motorR_Up.setPower(motorSpeed * 1);
+                motorL_Down.setPower(motorSpeed * -1);
+                motorR_Down.setPower(motorSpeed * -1);
+                motorL_Up.setPower(motorSpeed * -1);
+                motorR_Up.setPower(motorSpeed * -1);
             }
 
 
@@ -227,29 +221,18 @@ telefor2 extends LinearOpMode {
             // red/black servo movement
 
 
-            if(gamepad2.dpad_up)
-            {
-                RedServo.setPosition(1);
-                BlackServo.setPosition(1);
-            }
 
-
-
-            if (gamepad2.dpad_down)
-            {
-                BlackServo.setPosition(0);
-                RedServo.setPosition(0);
-            }
+          
 
 
             if (gamepad2.left_bumper) {
-           //     arm_servo = arm_servo - 0.369;
+                //     arm_servo = arm_servo - 0.369;
                 armservo.setPosition(0);
             }
 
             if (gamepad2.right_bumper) {
-         //  arm_servo = arm_servo + 0.369;
-           armservo.setPosition(1);
+                //  arm_servo = arm_servo + 0.369;
+                armservo.setPosition(1);
 
             }
 
@@ -258,37 +241,37 @@ telefor2 extends LinearOpMode {
 
 
 
-                ArmMotor_Left.setPower(gamepad2.left_stick_y * -armPower);
-                ArmMotor_Right.setPower(gamepad2.left_stick_y * armPower);
+            ArmMotor_Left.setPower(gamepad2.left_stick_y * -armPower);
+            ArmMotor_Right.setPower(gamepad2.left_stick_y * armPower);
 
-                if(gamepad2.a){
-                    armPower = 0.269;
-                }
-
-
-                if(gamepad2.b){
-                    armPower = 0.1769;
-                }
+            if(gamepad2.a){
+                armPower = 0.269;
+            }
 
 
-                ArmMotor_Right.getCurrentPosition();
-                ArmPosition = ArmMotor_Right.getCurrentPosition();
-
-                ShakeServo = shake_shack_servo.getPosition();
-
+            if(gamepad2.b){
+                armPower = 0.1769;
+            }
 
 
-                shake_shack_servo.setPosition((0.000553016*ArmPosition)+0.955998);
+            ArmMotor_Right.getCurrentPosition();
+            ArmPosition = ArmMotor_Right.getCurrentPosition();
+
+            ShakeServo = shake_shack_servo.getPosition();
 
 
+
+            shake_shack_servo.setPosition((0.000553016*ArmPosition)+0.955998);
 
 
 
 
 
 
-                telemetry.addData("ArmCurrentPosition = %d", ArmPosition);
-                telemetry.addData("ServoCurrentPosition = %d", ShakeServo);
+
+
+            telemetry.addData("ArmCurrentPosition = %d", ArmPosition);
+            telemetry.addData("ServoCurrentPosition = %d", ShakeServo);
 
 
 

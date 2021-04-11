@@ -75,6 +75,8 @@ public class autofunctions
     NormalizedColorSensor colorSensor3;
     NormalizedColorSensor colorSensor4;
 
+    NormalizedColorSensor colorsensor;
+
     Telemetry telemetry;
 
     public void Initialize(DcMotor motorL_DownIn,
@@ -96,6 +98,7 @@ public class autofunctions
                           // NormalizedColorSensor colorSensor4In,
                           // Servo side_servoIn,
                         //   Servo side_servo_clawIn,
+                           NormalizedColorSensor colorsensorIn,
 
                            Telemetry telemetryIn)
     {
@@ -113,6 +116,7 @@ public class autofunctions
       //  armservo = ArmServoIn;
       //  shake_shack_servo = shake_shack_servoIn;
         imu = imuIn;
+        colorsensor = colorsensorIn;
      //   colorSensor1 = colorSensor1In;
     //    colorSensor2 = colorSensor2In;
       //  colorSensor3 = colorSensor3In;

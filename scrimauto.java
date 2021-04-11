@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.programs2021.autofunctions;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "FinalAuto69", group = "Tutorials")
+@Autonomous(name = "Federales en la casa de patron Guzman", group = "Tutorials")
 public class scrimauto extends LinearOpMode
 {
     //all the wheel motors
@@ -65,6 +65,8 @@ public class scrimauto extends LinearOpMode
     NormalizedColorSensor colorSensor3;
     NormalizedColorSensor colorSensor4;
 
+    NormalizedColorSensor colorsensor;
+
     //calling auto_functions.
     autofunctions auto_functions = new autofunctions();
 
@@ -84,6 +86,7 @@ public class scrimauto extends LinearOpMode
         BMotor = hardwareMap.dcMotor.get("am");
         BServo = hardwareMap.servo.get("sg");
 
+        colorsensor = (NormalizedColorSensor) hardwareMap.colorSensor.get("cs");
         //hardware for servos
         // RedServo = hardwareMap.servo.get("red_servo");
         //  BlackServo = hardwareMap.servo.get("black_servo");
@@ -135,6 +138,7 @@ public class scrimauto extends LinearOpMode
               //  armservo,
               //  shake_shack_servo,
                 imu,
+              colorsensor,
               //  colorSensor1,
               //  colorSensor2,
                 telemetry);

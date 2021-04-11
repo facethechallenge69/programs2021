@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "69tele", group = "Tutorials")
+@TeleOp(name = "Patrón Guzman es mi negro", group = "Tutorials")
 
 //test zayn change
 
@@ -126,18 +126,18 @@ scrimtele extends LinearOpMode {
             if(moving == 0 && gamepad1.left_stick_y > 0 ) {
 // should be forward
                 moving = MOV_FRONT_BACK;
-                motorL_Down.setPower(motorSpeed * -1);
-                motorR_Down.setPower(motorSpeed * 1);
-                motorL_Up.setPower(motorSpeed * -1);
-                motorR_Up.setPower(motorSpeed * 1);
-            }
-            if(moving == 0 && gamepad1.left_stick_y < 0 ) {
-// should be backward
-                moving = MOV_FRONT_BACK;
                 motorL_Down.setPower(motorSpeed * 1);
                 motorR_Down.setPower(motorSpeed * -1);
                 motorL_Up.setPower(motorSpeed * 1);
                 motorR_Up.setPower(motorSpeed * -1);
+            }
+            if(moving == 0 && gamepad1.left_stick_y < 0 ) {
+// should be backward
+                moving = MOV_FRONT_BACK;
+                motorL_Down.setPower(motorSpeed * -1);
+                motorR_Down.setPower(motorSpeed * 1);
+                motorL_Up.setPower(motorSpeed * -1);
+                motorR_Up.setPower(motorSpeed * 1);
             }
             else if(gamepad1.left_stick_y ==0 && moving == MOV_FRONT_BACK)
             {
@@ -210,7 +210,18 @@ scrimtele extends LinearOpMode {
                 motorR_Up.setPower(0);
             }
 
-            BMotor.setPower(0.2*gamepad1.right_stick_y);
+            double bmotorpower = 1;
+
+            if(gamepad1.dpad_up) {
+                bmotorpower = 1;
+            }
+
+            if(gamepad1.dpad_down)
+            {
+                bmotorpower = 0.2;
+            }
+
+            BMotor.setPower(bmotorpower * gamepad1.right_stick_y);
 
             IntakeMotor.setPower(gamepad2.left_stick_y);
 
