@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 //random imports
@@ -49,6 +50,7 @@ public class scrimauto extends LinearOpMode
 
     private Servo side_servo;
     private Servo side_servo_claw;
+    private CRServo intakeservo;
 
     //Sleep calling
     private ElapsedTime runtime = new ElapsedTime();
@@ -85,6 +87,7 @@ public class scrimauto extends LinearOpMode
 
         BMotor = hardwareMap.dcMotor.get("am");
         BServo = hardwareMap.servo.get("sg");
+        intakeservo = (CRServo) hardwareMap.servo.get("is");
 
         colorsensor = (NormalizedColorSensor) hardwareMap.colorSensor.get("cs");
         //hardware for servos
@@ -131,6 +134,7 @@ public class scrimauto extends LinearOpMode
                 motorL_Up,
                 BMotor,
                  BServo,
+              intakeservo,
               //  RedServo,
               //  BlackServo,
                 ArmMotor_Left,

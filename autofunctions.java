@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
@@ -52,6 +53,8 @@ public class autofunctions
 
     private Servo side_servo_claw;
 
+    private CRServo intakeservo;
+
     private DcMotor Side_Arm_Gang;
 
     int CurrentPosition = 0;
@@ -85,6 +88,7 @@ public class autofunctions
                            DcMotor motorL_UpIn,
                            DcMotor BMotorIn,
                            Servo BServoIn,
+                           CRServo intakeservoIn,
                            //Servo RedServoIn,
                            //Servo BlackServoIn,
                            DcMotor ArmMotor_LeftIn,
@@ -108,6 +112,7 @@ public class autofunctions
         motorL_Up = motorL_UpIn;
         BMotor = BMotorIn;
         BServo = BServoIn;
+        intakeservo = intakeservoIn;
 
      //   RedServo = RedServoIn;
      //   BlackServo = BlackServoIn;

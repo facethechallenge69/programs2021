@@ -2,11 +2,12 @@ package org.firstinspires.ftc.teamcode.programs2021;
 //needs to be fixed
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "Patrón Guzman es mi negro", group = "Tutorials")
+@TeleOp(name = "Patrón Guzman vende el narcoticos y gana dinero", group = "Tutorials")
 
 //test zayn change
 
@@ -25,7 +26,7 @@ scrimtele extends LinearOpMode {
     private DcMotor BMotor;
     private Servo BServo;
     private DcMotor IntakeMotor;
-
+    private CRServo intakeservo;
 
 
 
@@ -49,6 +50,7 @@ scrimtele extends LinearOpMode {
 
         BMotor = hardwareMap.dcMotor.get("am");
         BServo = hardwareMap.servo.get("sg");
+        intakeservo = (CRServo) hardwareMap.servo.get("is");
         IntakeMotor = hardwareMap.dcMotor.get("im");
 
         ArmMotor1 = hardwareMap.dcMotor.get("am1");
@@ -237,6 +239,16 @@ scrimtele extends LinearOpMode {
             if(gamepad1.left_bumper)
             {
                 BServo.setPosition(1);
+            }
+
+            if(gamepad2.right_bumper)
+            {
+                intakeservo.setPower(1);
+            }
+
+            if(gamepad2.left_bumper)
+            {
+                intakeservo.setPower(-1);
             }
 
         }
