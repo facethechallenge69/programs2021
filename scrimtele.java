@@ -4,10 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "Patrón Guzman vende el narcoticos y gana dinero", group = "Tutorials")
+@TeleOp(name = "Patrón Guzman vende el narcoticós y gana dinero", group = "Tutorials")
 
 //test zayn change
 
@@ -50,7 +51,7 @@ scrimtele extends LinearOpMode {
 
         BMotor = hardwareMap.dcMotor.get("am");
         BServo = hardwareMap.servo.get("sg");
-        intakeservo = (CRServo) hardwareMap.servo.get("is");
+        intakeservo = hardwareMap.crservo.get("is");
         IntakeMotor = hardwareMap.dcMotor.get("im");
 
         ArmMotor1 = hardwareMap.dcMotor.get("am1");
