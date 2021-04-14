@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "Patrón Guzman vende el narcoticós y gana dinero", group = "Tutorials")
+@TeleOp(name = "Guzman", group = "Tutorials")
 
 //test zayn change
 
@@ -28,6 +28,8 @@ scrimtele extends LinearOpMode {
     private Servo BServo;
     private DcMotor IntakeMotor;
     private CRServo intakeservo;
+
+
 
 
 
@@ -84,7 +86,11 @@ scrimtele extends LinearOpMode {
         ArmMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ArmMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        intakeservo.setPower(0.5);
+
+
         waitForStart();
+
 
         while (opModeIsActive()) {
             //moves wheels forward and backward
@@ -224,7 +230,8 @@ scrimtele extends LinearOpMode {
                 bmotorpower = 0.2;
             }
 
-            BMotor.setPower(bmotorpower * gamepad1.right_stick_y);
+            //BMotor.setPower(bmotorpower * gamepad1.right_stick_y);
+         //   intakeservo.setPower(gamepad1.right_stick_y);
 
             IntakeMotor.setPower(gamepad2.left_stick_y);
 
@@ -242,15 +249,25 @@ scrimtele extends LinearOpMode {
                 BServo.setPosition(1);
             }
 
-            if(gamepad2.right_bumper)
-            {
+
+            if(gamepad2.right_bumper) {
+
                 intakeservo.setPower(1);
             }
 
-            if(gamepad2.left_bumper)
-            {
-                intakeservo.setPower(-1);
+            if(gamepad2.left_bumper) {
+
+                intakeservo.setPower(0);
             }
+
+
+
+
+
+
+
+
+
 
         }
 
