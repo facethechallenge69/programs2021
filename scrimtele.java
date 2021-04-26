@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "Guzman", group = "Tutorials")
+@TeleOp(name = "Patron Guzman come senor taquero", group = "Tutorials")
 
 //test zayn change
 
@@ -63,6 +63,8 @@ scrimtele extends LinearOpMode {
 
         double ThrowSpeed = 1;
 
+        double bmotorpower = 1;
+
 
         int moving = 0;
 
@@ -82,6 +84,7 @@ scrimtele extends LinearOpMode {
         motorL_Down.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorR_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL_Up.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         ArmMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ArmMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -109,7 +112,7 @@ scrimtele extends LinearOpMode {
 
             if(gamepad2.a)
             {
-               ThrowSpeed = 1;
+                ThrowSpeed = 1;
             }
             if(gamepad2.b)
             {
@@ -219,10 +222,10 @@ scrimtele extends LinearOpMode {
                 motorR_Up.setPower(0);
             }
 
-            double bmotorpower = 1;
+
 
             if(gamepad1.dpad_up) {
-                bmotorpower = 1;
+                bmotorpower = .69;
             }
 
             if(gamepad1.dpad_down)
@@ -230,8 +233,8 @@ scrimtele extends LinearOpMode {
                 bmotorpower = 0.2;
             }
 
-            //BMotor.setPower(bmotorpower * gamepad1.right_stick_y);
-         //   intakeservo.setPower(gamepad1.right_stick_y);
+            BMotor.setPower(bmotorpower * gamepad1.right_stick_y);
+            //   intakeservo.setPower(gamepad1.right_stick_y);
 
             IntakeMotor.setPower(gamepad2.left_stick_y);
 
@@ -250,15 +253,21 @@ scrimtele extends LinearOpMode {
             }
 
 
-            if(gamepad2.right_bumper) {
 
+
+            if (gamepad2.dpad_up)
+            {
+                intakeservo.setPower(0.06);
+            }
+
+            if(gamepad2.dpad_down) {
+                intakeservo.setPower(-1);
+            }
+
+            if(gamepad2.dpad_right) {
                 intakeservo.setPower(1);
             }
 
-            if(gamepad2.left_bumper) {
-
-                intakeservo.setPower(0);
-            }
 
 
 
@@ -288,3 +297,4 @@ Right Stick controls the motors that throw the rings
 a,b,x,y changes speed of the throw motors
 
 */
+

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.programs2021;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
@@ -16,16 +15,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import android.graphics.Color;
-import android.os.SystemClock;
 
-import static android.graphics.Color.WHITE;
-import static android.graphics.Color.YELLOW;
 import static android.os.SystemClock.sleep;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-
-import com.qualcomm.robotcore.hardware.GyroSensor;
 
 public class autofunctions
 {
@@ -44,6 +37,8 @@ public class autofunctions
 
     private DcMotor ArmMotor_Left;
     private DcMotor ArmMotor_Right;
+
+    private DcMotor IntakeMotor;
 
     private Servo armservo;
 
@@ -78,7 +73,8 @@ public class autofunctions
     NormalizedColorSensor colorSensor3;
     NormalizedColorSensor colorSensor4;
 
-    NormalizedColorSensor colorsensor;
+    NormalizedColorSensor CS1;
+    NormalizedColorSensor CS2;
 
     Telemetry telemetry;
 
@@ -89,20 +85,15 @@ public class autofunctions
                            DcMotor BMotorIn,
                            Servo BServoIn,
                            CRServo intakeservoIn,
-                           //Servo RedServoIn,
-                           //Servo BlackServoIn,
+
                            DcMotor ArmMotor_LeftIn,
                            DcMotor ArmMotor_RightIn,
-                          // Servo ArmServoIn,
-                          // Servo shake_shack_servoIn,
+                           DcMotor IntakeMotorIn,
+
                            BNO055IMU imuIn,
-                         //  NormalizedColorSensor colorSensor1In,
-                        //   NormalizedColorSensor colorSensor2In,
-                         //  NormalizedColorSensor colorSensor3In,
-                          // NormalizedColorSensor colorSensor4In,
-                          // Servo side_servoIn,
-                        //   Servo side_servo_clawIn,
-                           NormalizedColorSensor colorsensorIn,
+
+                           NormalizedColorSensor CS1In,
+                           NormalizedColorSensor CS2In,
 
                            Telemetry telemetryIn)
     {
@@ -114,24 +105,16 @@ public class autofunctions
         BServo = BServoIn;
         intakeservo = intakeservoIn;
 
-     //   RedServo = RedServoIn;
-     //   BlackServo = BlackServoIn;
+
         ArmMotor_Left = ArmMotor_LeftIn;
         ArmMotor_Right = ArmMotor_RightIn;
-      //  armservo = ArmServoIn;
-      //  shake_shack_servo = shake_shack_servoIn;
+        IntakeMotor = IntakeMotorIn;
+
         imu = imuIn;
-        colorsensor = colorsensorIn;
-     //   colorSensor1 = colorSensor1In;
-    //    colorSensor2 = colorSensor2In;
-      //  colorSensor3 = colorSensor3In;
-      //  colorSensor4 = colorSensor4In;
-       // side_servo = side_servoIn;
-      //  side_servo_claw = side_servo_clawIn;
+        CS1 = CS1In;
+        CS2 = CS2In;
 
         telemetry = telemetryIn;
-
-
     }
 
     public void ResetGyro()
@@ -427,55 +410,6 @@ public class autofunctions
         StopDriving();
     }
 
-
-    public int StrafeRightColor (double Power, int Distance)
-    {
-
-        int CurrentPosition = 0;
-
-        motorR_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        AllBRAKE();
-
-        motorR_Up.setTargetPosition(-Distance);
-        motorR_Down.setTargetPosition(Distance);
-        motorL_Up.setTargetPosition(-Distance);
-        motorL_Down.setTargetPosition(Distance);
-
-
-        motorR_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        motorR_Up.setPower(-Power);
-        motorR_Down.setPower(Power);
-        motorL_Up.setPower(-Power);
-        motorL_Down.setPower(Power);
-
-        while (motorR_Up.isBusy() && motorR_Down.isBusy()&& motorL_Up.isBusy()&& motorL_Down.isBusy())
-        {
-            int got_color = getcubebluecolor();
-            if (got_color == 1)
-            {
-                CurrentPosition = motorR_Up.getCurrentPosition();
-                break;
-            }
-
-
-        }
-
-        StopDriving();
-
-        return CurrentPosition;
-
-    }
-
     public void StrafeLeft(double Power, int Distance)
     {
 
@@ -512,53 +446,7 @@ public class autofunctions
         StopDriving();
     }
 
-    public int StrafeLeftColor (double Power, int Distance)
-    {
 
-        int CurrentPosition = 0;
-
-        motorR_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        AllBRAKE();
-
-        motorR_Up.setTargetPosition(Distance);
-        motorR_Down.setTargetPosition(-Distance);
-        motorL_Up.setTargetPosition(Distance);
-        motorL_Down.setTargetPosition(-Distance);
-
-
-        motorR_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        motorR_Up.setPower(Power);
-        motorR_Down.setPower(-Power);
-        motorL_Up.setPower(Power);
-        motorL_Down.setPower(-Power);
-
-        while (motorR_Up.isBusy() && motorR_Down.isBusy()&& motorL_Up.isBusy()&& motorL_Down.isBusy())
-        {
-            int got_color = getcubebluecolor();
-            if (got_color == 1)
-            {
-                CurrentPosition = motorR_Up.getCurrentPosition();
-                break;
-            }
-
-
-        }
-
-        StopDriving();
-
-        return CurrentPosition;
-
-    }
 
     public void ArmUpDown    (double Power, int Distance)
     {
@@ -617,13 +505,26 @@ public class autofunctions
 
         while (BMotor.isBusy())
         {
-                //wait until its done
+            //wait until its done
         }
 
         BMotor.setPower(0);
 
 
 
+    }
+
+
+    public void IntakeTime (double Power, long Time)
+    {
+        ArmMotor_Left.setPower(-Power);
+        ArmMotor_Right.setPower(Power);
+        sleep(1069);
+        IntakeMotor.setPower(-0.69);
+        sleep(Time);
+        ArmMotor_Left.setPower(0);
+        ArmMotor_Right.setPower(0);
+        IntakeMotor.setPower(0);
     }
 
     public void CloseServo ()
@@ -712,9 +613,9 @@ public class autofunctions
 
     }
 
-    public int getcubebluecolor() {
-        NormalizedRGBA colors = colorSensor1.getNormalizedColors();
-        NormalizedRGBA colors2 = colorSensor2.getNormalizedColors();
+    public int getringcolor() {
+        NormalizedRGBA colors = CS1.getNormalizedColors();
+        NormalizedRGBA colors2 = CS2.getNormalizedColors();
 
         int color = colors.toColor();
         int color2 = colors2.toColor();
@@ -738,58 +639,105 @@ public class autofunctions
                 .addData("g", "%d", Color.green(color))
                 .addData("b", "%d", Color.blue(color));
 
-        if (Color.red(color) < 88 && Color.red(color) > 0 && Color.red(color2) < 88 && Color.red(color2) > 0) {
-            telemetry.addLine("Got black");
+        if (Color.red(color) < 100 && Color.red(color2) < 100) {
+            telemetry.addLine("no rings");
             telemetry.addData("r", "%d", Color.red(color));
             telemetry.addData("r", "%d", Color.red(color2));
 
             telemetry.update();
             return 1; // 1 = true
         }
+        if (Color.red(color) > 100 && Color.red(color2) < 100) {
+            telemetry.addLine("1 ring");
+            telemetry.addData("r", "%d", Color.red(color));
+            telemetry.addData("r", "%d", Color.red(color2));
+
+            telemetry.update();
+            return 2; // 1 = true
+        }
+        if (Color.red(color) > 100 && Color.red(color2) > 100) {
+            telemetry.addLine("3 rings");
+            telemetry.addData("r", "%d", Color.red(color));
+            telemetry.addData("r", "%d", Color.red(color2));
+
+            telemetry.update();
+            return 3; // 1 = true
+        }
 
         telemetry.addLine("nope");
         telemetry.addData("r", "%d", Color.red(color));
         telemetry.addData("r", "%d", Color.red(color2));
         telemetry.update();
-        return 0;  // 0 = false
+        return 0;
     }
 
-    public int getcuberedcolor()
-    {
-        NormalizedRGBA colors3 = colorSensor3.getNormalizedColors();
-        NormalizedRGBA colors4 = colorSensor4.getNormalizedColors();
+    public void program() {
+        int get_color = getringcolor();
 
-        int color3 = colors3.toColor();
-        int color4 = colors4.toColor();
-
-        float max = Math.max(Math.max(Math.max(colors3.red, colors3.green), colors3.blue), colors3.alpha);
-        colors3.red /= max;
-        colors3.green /= max;
-        colors3.blue /= max;
-        color3 = colors3.toColor();
-
-        float max2 = Math.max(Math.max(Math.max(colors4.red, colors4.green), colors4.blue), colors4.alpha);
-        colors4.red /= max2;
-        colors4.green /= max2;
-        colors4.blue /= max2;
-        color4 = colors4.toColor();
+        if (getringcolor()==1)
+        {
+            //DriveForward(0.3,-769);
 
 
-        telemetry.addLine("normalized color 18: ")
-                .addData("r", "%d", Color.red(color3))
-                .addData("r","%d", Color.red(color4));
+            DriveForward(0.3, (-2669 + -769) );
+            sleep(100);
+            TurnLeft(0.3,1269);
+            sleep(100);
+            DriveForward(0.3,-500);
+            sleep(100);
+            BobberMotor(0.2,469);
+            sleep(1000);
+            BServo.setPosition(1);
+            sleep(300);
+           // BServo.setPosition(0);
+            BobberMotor(0.5,-669);
+            sleep(250);
+            DriveForward(0.6,2769);
+            sleep(100);
+            TurnLeft(0.3,1269);
+            sleep(100);
+            DriveForward(0.6,-4038);
+            sleep(100);
+            TurnRight(0.3,1269);
+            sleep(100);
+            DriveForward(0.3,-800);
+            sleep(100);
+            TurnRight(0.3,769);
+            sleep(100);
+            DriveForward(0.1,-800);
+            DriveForward(0.3,-3038);
+            sleep(100);
+            DriveForward(0.69,969);
+            sleep(100);
+            TurnRight(0.69,369);
+            sleep(100);
+            DriveForward(0.69,-1269);
+        }
+        if (getringcolor()==2)
+        {
+            DriveForward(0.3,-3069);
+            sleep(100);
+            BobberMotor(0.5,469);
+            sleep(100);
+            BServo.setPosition(1);
+            sleep(1000);
+            BServo.setPosition(0);
+            BobberMotor(0.5,-469);
+            sleep(100);
+            DriveForward(0.5,4069);
+            sleep(100);
+            TurnRight(0.3,1269);
+            sleep(100);
+            DriveForward(0.3,-1369);
+            sleep(100);
+            TurnLeft(0.3,1669);
+            sleep(100);
+            DriveForward(0.3,-4169);
 
-
-        if (Color.red(color3) < 88 && Color.red(color3) > 0 && Color.red(color4) < 88 && Color.red(color4) > 0) {
-            telemetry.addLine("Got black");
-            telemetry.update();
-            return 1; // 1 = true
         }
 
-        telemetry.addLine("nope");
-        telemetry.update();
-        return 0;  // 0 = false
     }
+
 
     public int getTurn()
     {
@@ -902,210 +850,6 @@ public class autofunctions
         }
 
         StopDriving();
-    }
-
-    public void bluud_3_comp(int Distance)
-    {
-        ArmMotor_Right.getCurrentPosition();
-
-        //Setting Arm Position to the Current Position
-        ArmMotor_Right.getCurrentPosition();
-
-        //Drives to first cube
-        DriveForward(0.469, -1675);
-        sleep(250);
-
-        //Strafes so that color sensors are centered to the first cube
-        StrafeLeft(0.1869,225);
-
-        sleep(350);
-
-        //Sets the Current Position function to the amount of encoder ticks it took for the color sensor to find black while strafing
-        CurrentPosition = StrafeLeftColor(0.269, 2750);
-        if(CurrentPosition < 0)
-            CurrentPosition = CurrentPosition * -1;
-        sleep(250);
-
-        ArmMotor_Right.getCurrentPosition();
-
-        getcube();
-        sleep(100);
-
-        //Turns Left to make a straight trajectory towards the foundation
-        TurnLeftCompensation(0.4,1150);
-        sleep(100);
-
-        ArmUpDown(0.9,150);
-
-
-        //Drives Forward for -1500 - Current Position towards the foundation
-        telemetry.addData("CurrentPosition", "%d", CurrentPosition);
-        telemetry.update();
-        DriveForward(0.9, -1600-CurrentPosition+Distance);
-
-    }
-
-    public void bloodred_3_comp(int Distance)
-    {
-        ArmMotor_Right.getCurrentPosition();
-
-        //Setting Arm Position to the Current Position
-        ArmMotor_Right.getCurrentPosition();
-
-        //Drives to first cube
-        DriveForward(0.469, -1675);
-        sleep(250);
-
-        //Strafes so that color sensors are centered to the first cube
-        StrafeRight(0.1869,225);
-
-        sleep(350);
-
-        //Sets the Current Position function to the amount of encoder ticks it took for the color sensor to find black while strafing
-        CurrentPosition = StrafeRightColor(0.269, 2750);
-        if(CurrentPosition < 0)
-            CurrentPosition = CurrentPosition * -1;
-        sleep(250);
-
-        ArmMotor_Right.getCurrentPosition();
-
-        getcube();
-        sleep(100);
-
-        //Turns Left to make a straight trajectory towards the foundation
-        TurnRightCompensation(0.4,1150);
-        sleep(100);
-
-        ArmUpDown(0.369,150);
-
-
-        //Drives Forward for -1500 - Current Position towards the foundation
-        telemetry.addData("CurrentPosition", "%d", CurrentPosition);
-        telemetry.update();
-        DriveForward(0.9, -1600-CurrentPosition+Distance);
-
-    }
-
-
-    public int DriveForwardColorBlueSide (double Power, int Distance)
-    {
-
-        int CurrentPosition = 0;
-
-        motorR_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        AllBRAKE();
-
-        motorR_Up.setTargetPosition(Distance);
-        motorR_Down.setTargetPosition(Distance);
-        motorL_Up.setTargetPosition(-Distance);
-        motorL_Down.setTargetPosition(-Distance);
-
-
-        motorR_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        motorR_Up.setPower(Power);
-        motorR_Down.setPower(Power);
-        motorL_Up.setPower(-Power);
-        motorL_Down.setPower(-Power);
-
-        while (motorR_Up.isBusy() && motorR_Down.isBusy()&& motorL_Up.isBusy()&& motorL_Down.isBusy())
-        {
-            int got_color = getcubebluecolor();
-            if (got_color == 1)
-            {
-                CurrentPosition = motorR_Up.getCurrentPosition();
-                break;
-            }
-
-
-        }
-
-        StopDriving();
-
-        return CurrentPosition;
-
-    }
-
-    public int DriveForwardColorRedSide (double Power, int Distance)
-    {
-
-        int CurrentPosition = 0;
-
-        motorR_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorR_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Up.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorL_Down.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-        AllBRAKE();
-
-        motorR_Up.setTargetPosition(Distance);
-        motorR_Down.setTargetPosition(Distance);
-        motorL_Up.setTargetPosition(-Distance);
-        motorL_Down.setTargetPosition(-Distance);
-
-
-        motorR_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Up.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorL_Down.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        motorR_Up.setPower(Power);
-        motorR_Down.setPower(Power);
-        motorL_Up.setPower(-Power);
-        motorL_Down.setPower(-Power);
-
-        while (motorR_Up.isBusy() && motorR_Down.isBusy()&& motorL_Up.isBusy()&& motorL_Down.isBusy())
-        {
-            int got_color = getcuberedcolor();
-            if (got_color == 1)
-            {
-                CurrentPosition = motorR_Up.getCurrentPosition();
-                break;
-            }
-        }
-        StopDriving();
-
-        return CurrentPosition;
-    }
-
-
-
-
-
-    public void Side_Arm_Outline_Comp_Blue(int Distance)
-    {
-        ArmMotor_Right.getCurrentPosition();
-
-        //Setting Arm Position to the Current Position
-        ArmMotor_Right.getCurrentPosition();
-
-        //Drives to first cube
-        DriveForward(0.469, -1675);
-        sleep(250);
-
-        TurnRight(0.69,69);
-
-        DriveForward(0.69,69);
-
-        CurrentPosition = DriveForwardColorBlueSide(0.269, 2750);
-        if(CurrentPosition < 0)
-            CurrentPosition = CurrentPosition * -1;
-        sleep(250);
-
-        side_servo.setPosition(0.69);
-
-        side_servo_claw.setPosition(0.69);
     }
 
     //GYRO STUFF DONT TOUCH/REMOVE
@@ -1221,6 +965,7 @@ public class autofunctions
         resetAngle();
     }
 }
+
 
 
 

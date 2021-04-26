@@ -23,8 +23,8 @@ import org.firstinspires.ftc.teamcode.programs2021.autofunctions;
 
 import static android.os.SystemClock.sleep;
 
-@Autonomous(name = "Patron Guzman tiene armas automaticas", group = "Tutorials")
-public class scrimauto extends LinearOpMode
+@Autonomous(name = "guzman shooto el policia", group = "Tutorials")
+public class shooter extends LinearOpMode
 {
     //all the wheel motors
     private DcMotor motorL_Up;
@@ -138,10 +138,9 @@ public class scrimauto extends LinearOpMode
 
         waitForStart();
 
-        auto_functions.DriveForward(0.3,-690);
-        auto_functions.IntakeTime(0.69,4000);
 
-        auto_functions.program();
+
+        auto_functions.IntakeTime(0.369,6000);;
 
 
 

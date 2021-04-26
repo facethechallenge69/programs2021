@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@TeleOp(name = "Señor Guzman", group = "Tutorials")
+@TeleOp(name = "Federales en la casa de patron guzman", group = "Tutorials")
 
 //test zayn change
 

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-@Autonomous(name="AutoGyroTurn90slow(84)", group="Exercises")
+@Autonomous(name="Patron Guzman vende el narcoticos y recibe mucho dinero", group="Exercises")
 //@Disabled
 public class AutoGyro extends LinearOpMode
 {
